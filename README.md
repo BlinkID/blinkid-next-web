@@ -1,0 +1,52 @@
+# BlinkID Next
+
+This project is set up as a monorepo. The SDK is split into multiple packages, located inside the `/packages` directory.
+
+## Required tools:
+
+1. NodeJS LTS
+
+   - Prefer using [`nvm`](https://github.com/nvm-sh/nvm) on dev machines:
+
+   ```sh
+   nvm install --lts
+   nvm use --lts
+   ```
+
+   - [alternative installation methods](https://nodejs.org/en/download)
+
+2. `pnpm`
+
+   - alternative package manager to `npm`
+   - easiest to install using `npm install -g pnpm`
+   - [alternative installation methods](https://pnpm.io/installation)
+
+## Installation instructions:
+
+Install packages:
+
+```sh
+pnpm install
+```
+
+Run the build process, this will configure and build all the packages in the monorepo:
+
+```sh
+pnpm run build
+```
+
+To run an example app, navigate to any of the examples in `/apps/` and run:
+
+```sh
+pnpm run dev
+```
+
+To run the app on your local network use:
+
+```sh
+pnpm run dev --host
+```
+
+To run the example apps, you will need a licence key and place it in the `.env` file.
+
+Additionally, each package can be built individually by navigating to its folder and running the corresponding scripts.

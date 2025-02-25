@@ -1,0 +1,20 @@
+{
+  "extends": "@microblink/tsconfig/base.json",
+  "compilerOptions": {
+    "emitDeclarationOnly": true,
+    "declarationDir": "types",
+    "rootDir": "src",
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "types": [
+      "vite/client",
+      "vite-plugin-solid-svg/types",
+      "unplugin-icons/types/solid",
+      "@vitest/browser/providers/playwright"
+    ]
+  },
+  "include": ["src", "~icons"]
+}
+
+
+// including "@vitest/browser/providers/playwright" breaks index.d.ts output

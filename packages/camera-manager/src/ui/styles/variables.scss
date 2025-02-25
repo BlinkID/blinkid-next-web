@@ -1,0 +1,40 @@
+:host {
+  --mb-system-font-stack:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
+  --mb-monospace-font-stack:
+    Menlo, Consolas, "Ubuntu Mono", "Roboto Mono", "DejaVu Sans Mono", monospace;
+
+  --mb-ui-font: var(--mb-system-font-stack);
+
+  --mb-size: 1;
+
+  //   --mb-color-cobalt-1: #0062f2;
+  //   --mb-color-cobalt-2: #3a89fd;
+  //   --mb-color-cobalt-3: #6fa9ff;
+  //   --mb-color-cobalt-4: #e7f0ff;
+  //   --mb-color-white: #fff;
+  //   --mb-color-black: #000;
+  //   --mb-color-darkblue: #142641;
+
+  //   --mb-color-primary: var(--mb-color-cobalt-1);
+  //   --mb-color-primary-light: var(--mb-color-cobalt-2);
+  //   --mb-color-primary-lighter: var(--mb-color-cobalt-3);
+  //   --mb-color-primary-lightest: var(--mb-color-cobalt-4);
+
+  //   --mb-gray-100: #f3f4f6;
+  //   --mb-gray-400: #9ca3af;
+  //   --mb-gray-600: #4b5563;
+  //   --mb-gray-700: #374151;
+  //   --mb-gray-overlay-bg: #282c34;
+  //   --mb-dot-inactive: #c6c6c8;
+
+  //   --mb-feedback-bg: rgba(102, 102, 102, 0.5);
+  //   --mb-reticle-ok: rgba(102, 102, 102, 0.5);
+  //   --mb-reticle-error: rgba(251, 113, 133, 0.6);
+
+  //   --mb-camera-picker-bg: rgba(102, 102, 102, 0.5);
+
+  //   --mb-z-index-root: 50;
+}

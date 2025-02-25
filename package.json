@@ -1,0 +1,30 @@
+{
+  "name": "blinkid-next-monorepo",
+  "description": "",
+  "version": "1.0.0",
+  "author": "",
+  "scripts": {
+    "build": "turbo build",
+    "build:dev": "turbo build:dev --filter={./packages/*}",
+    "build:publish": "turbo build:publish --filter={./packages/*}",
+    "clean": "turbo clean",
+    "lint": "turbo lint",
+    "prepare": "husky install",
+    "publish-test": "turbo publish-test",
+    "test": "turbo test",
+    "test:watch": "turbo test:watch",
+    "upgrade-packages": "pnpm dlx npm-check-updates -ui -ws --root",
+    "watch": "turbo watch --filter='./packages/*'"
+  },
+  "dependencies": {
+    "vitest": "3.0.5"
+  },
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.10",
+    "syncpack": "13.0.2",
+    "turbo": "^2.4.2"
+  },
+  "license": "ISC",
+  "packageManager": "pnpm@9.11.0"
+}
