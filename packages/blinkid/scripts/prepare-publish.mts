@@ -34,6 +34,7 @@ await fs.emptyDir(publishPath);
 
 await fs.copy("dist", path.join(publishPath, "dist"));
 await fs.copy("types", path.join(publishPath, "types"));
+await fs.copy("README.md", path.join(publishPath, "README.md"));
 
 // Since monorepo dependencies resolve to the version "workspace:*", we need
 // to resolve the actual versions of the dependencies before publishing the
@@ -60,6 +61,11 @@ await writePackage(
     access: "public",
     registry: "https://registry.npmjs.org/",
     types: "./types/index.rollup.d.ts",
+    homepage: "https://github.com/BlinkID/blinkid-next-web",
+    repository: {
+      type: "git",
+      url: "git+https://github.com/BlinkID/blinkid-next-web.git",
+    },
     exports: {
       ".": {
         types: "./types/index.rollup.d.ts",

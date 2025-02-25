@@ -28,4 +28,4 @@ blinkId.addOnResultCallback((result) => {
 });
 ```
 
-For more details on setup requirements and advanced usage, check out the documentation at [TODO]
+For more details on setup requirements and advanced usage, check out the documentation at https://github.com/BlinkID/blinkid-next-web
