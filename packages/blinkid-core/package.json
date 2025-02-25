@@ -1,7 +1,7 @@
 {
   "name": "@microblink/blinkid-core",
   "description": "",
-  "version": "7.0.0-next.5",
+  "version": "7.0.0-next.8",
   "author": "Microblink",
   "scripts": {
     "build": "concurrently pnpm:build:js pnpm:build:types",
@@ -48,7 +48,8 @@
     "@microblink/blinkid-worker": "workspace:*",
     "comlink": "git@github.com:foxglove/comlink.git",
     "common-tags": "^1.8.2",
-    "nanoid": "^5.0.2"
+    "nanoid": "^5.0.2",
+    "type-fest": "^4.35.0"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.17.3",
@@ -65,7 +66,6 @@
     "read-pkg": "^9.0.1",
     "rimraf": "^6.0.1",
     "tsx": "^4.19.2",
-    "type-fest": "^4.35.0",
     "typescript": "^5.7.3",
     "vite": "^6.1.0",
     "vitest": "3.0.5",

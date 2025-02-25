@@ -44,6 +44,10 @@ await writePackage(
   newPackagePath,
   {
     ...corePackageJson,
+    dependencies: {
+      "type-fest": packageJson.dependencies["type-fest"],
+      comlink: packageJson.dependencies.comlink,
+    },
     access: "public",
     registry: "https://registry.npmjs.org/",
     types: "./types/index.rollup.d.ts",

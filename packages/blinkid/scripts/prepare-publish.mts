@@ -1,5 +1,5 @@
 import { Simplify } from "type-fest";
-import { PackageJsonData, writePackage } from "write-package";
+import { PackageJsonData, updatePackage, writePackage } from "write-package";
 import "zx/globals";
 
 import { getPackagePath } from "@microblink/utils";
@@ -45,13 +45,20 @@ const microblinkDependencies = Object.keys(packageJson.dependencies).filter(
 );
 
 const mbDepsWithVersion = microblinkDependencies.reduce<
-  NonNullable<PackageJsonData["dependencies"]>
+  PackageJsonData["dependencies"]
 >((acc, key) => {
   const pkgPath = getPackagePath(key);
   const pkgJson = fs.readJsonSync(path.join(pkgPath, "package.json"));
+  if (!acc) {
+    return;
+  }
   acc[key] = `^${pkgJson.version}`;
   return acc;
 }, {});
+
+// add type-fest to dependencies
+const typeFestVersion = packageJson.dependencies["type-fest"];
+mbDepsWithVersion!["type-fest"] = typeFestVersion;
 
 await writePackage(
   newPackagePath,
