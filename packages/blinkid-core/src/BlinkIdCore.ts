@@ -28,7 +28,7 @@ export interface BlinkIdCore extends _BlinkIdCore {}
 // User ID is optional outside the worker scope
 export type BlinkIdInitSettings = SetOptional<
   BlinkIdWorkerInitSettings,
-  "userId"
+  "userId" | "useBarcodeDeblurModel"
 >;
 
 /**
@@ -124,6 +124,14 @@ export async function createBlinkIdCore(
 
   if (!settings.resourcesLocation) {
     settings.resourcesLocation = window.location.href;
+  }
+
+  if (settings.useBarcodeDeblurModel === undefined) {
+    // use only on desktop devices
+    settings.useBarcodeDeblurModel =
+      !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent,
+      );
   }
 
   try {

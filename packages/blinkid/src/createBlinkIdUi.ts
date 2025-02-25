@@ -4,7 +4,6 @@
 
 import {
   BlinkIdCore,
-  BlinkIdResult,
   createBlinkIdCore,
   type BlinkIdInitSettings,
 } from "@microblink/blinkid-core";
@@ -52,7 +51,7 @@ export const createBlinkIdUi = async ({
 }: BlinkIdUiSettings) => {
   // we first initialize the direct API. This loads the WASM module and initializes the engine
   const blinkIdCore = await createBlinkIdCore({
-    licenseKey: licenseKey,
+    licenseKey,
     blinkIdSettings,
   });
 
@@ -78,7 +77,11 @@ export const createBlinkIdUi = async ({
 
   const destroy = async () => {
     cameraUi.dismount();
-    await blinkIdCore.terminateWorker();
+    try {
+      await blinkIdCore.terminateWorker();
+    } catch (error) {
+      console.warn(error);
+    }
   };
 
   const returnObject: BlinkIdUi = {

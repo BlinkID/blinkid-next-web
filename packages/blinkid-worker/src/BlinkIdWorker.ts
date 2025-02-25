@@ -23,31 +23,38 @@ import { BlinkIdModernConverter } from "./BlinkIdModernConverter";
 import { BlinkIdResult } from "./BlinkIdResult";
 import { FrameAnalysisResult } from "./FrameAnalysisResult";
 import { getCrossOriginWorkerURL } from "./getCrossOriginWorkerURL";
-import { convertEmscriptenStatusToProgress } from "./utils";
+import { isIOS } from "./isSafari";
 import { obtainNewServerPermission } from "./licencing";
+import { mbToWasmPages } from "./mbToWasmPages";
+import { convertEmscriptenStatusToProgress } from "./utils";
 
 // might be needed for types to work
 
 const SCRIPT_NAME = "BlinkIDWasmSDK";
-const BLINKID_WASM_VARIANT = "full";
-
-// https://twitter.com/subzey/status/1711117272142471398/
-// This is used as a "black hole" port to force GC of ImageData
-// const { port1, port2 } = new MessageChannel();
-// // "Black hole" port
-// port2.close();
 
 export type BlinkIdWorkerInitSettings = {
   /**
    * The parent directory where the `/resources` directory is hosted.
    * Defaults to `window.location.href`, at the root of the current page.
    */
-  resourcesLocation?: string;
   licenseKey: string;
+  resourcesLocation?: string;
   userId: string;
   wasmVariant?: WasmVariant;
+  /**
+   * The initial memory allocation for the Wasm module, in megabytes.
+   */
+  initialMemory?: number;
   scanningMode?: ActiveRecognizer;
   blinkIdSettings?: Partial<BlinkIdMultiSideRecognizerSettings>;
+  useBarcodeDeblurModel: boolean;
+};
+
+export type LoadWasmParams = {
+  resourceUrl: string;
+  variant?: WasmVariant;
+  useBarcodeDeblurModel: boolean;
+  initialMemory?: number;
 };
 
 export type ActiveRecognizer = "singleSide" | "multiSide";
@@ -77,13 +84,13 @@ class BlinkIdWorker {
   /**
    * This method loads the Wasm module.
    */
-  async #loadWasm(
-    resourceUrl: string,
-    variant?: WasmVariant,
-    // onProgress: BlinkIdInitSettings["onProgress"],
-  ) {
-    console.log("loading Wasm");
 
+  async #loadWasm({
+    resourceUrl,
+    variant,
+    useBarcodeDeblurModel,
+    initialMemory,
+  }: LoadWasmParams) {
     if (this.#wasmModule) {
       console.log("Wasm already loaded");
       return;
@@ -91,7 +98,9 @@ class BlinkIdWorker {
 
     const wasmVariant = variant ?? (await detectWasmFeatures());
 
-    const variantUrl = `${resourceUrl}/${BLINKID_WASM_VARIANT}/${wasmVariant}`;
+    const modelWeight = useBarcodeDeblurModel ? "full" : "lightweight";
+
+    const variantUrl = `${resourceUrl}/${modelWeight}/${wasmVariant}`;
     const loaderUrl = `${variantUrl}/${SCRIPT_NAME}.js`;
 
     const crossOriginLoaderUrl = await getCrossOriginWorkerURL(loaderUrl);
@@ -107,6 +116,18 @@ class BlinkIdWorker {
       throw new Error("MicroblinkWasmSDK not found in global scope");
     }
 
+    // use default memory settings if not provided
+    if (!initialMemory) {
+      // safari requires a larger initial memory allocation as it often block memory growth
+      initialMemory = isIOS() ? 700 : 200;
+    }
+
+    const wasmMemory = new WebAssembly.Memory({
+      initial: mbToWasmPages(initialMemory),
+      maximum: mbToWasmPages(2048),
+      shared: wasmVariant === "advanced-threads",
+    });
+
     /**
      * https://emscripten.org/docs/api_reference/module.html#module-object
      */
@@ -118,6 +139,7 @@ class BlinkIdWorker {
       // pthreads build breaks without this:
       // "Failed to execute 'createObjectURL' on 'URL': Overload resolution failed."
       mainScriptUrlOrBlob: loaderUrl,
+      wasmMemory,
       noExitRuntime: true,
       setStatus: (text) => {
         const progressPercent = convertEmscriptenStatusToProgress(text);
@@ -149,7 +171,12 @@ class BlinkIdWorker {
       settings.resourcesLocation,
     ).toString();
     // initialize wasm module, will reuse if already loaded
-    await this.#loadWasm(resourcesPath, settings.wasmVariant);
+    await this.#loadWasm({
+      resourceUrl: resourcesPath,
+      variant: settings.wasmVariant,
+      initialMemory: settings.initialMemory,
+      useBarcodeDeblurModel: settings.useBarcodeDeblurModel,
+    });
 
     if (!this.#wasmModule) {
       throw new Error("Wasm module not loaded");
@@ -309,10 +336,6 @@ class BlinkIdWorker {
         this.#lastQuad,
       );
 
-    // deref the image to an empty MessagePort to force GC
-    // port1.postMessage(image.imageData.data, [image.imageData.data.buffer]);
-
-    // return transfer(frameAnalysisResult, [image.imageData.data.buffer]);
     return frameAnalysisResult;
   }
 
