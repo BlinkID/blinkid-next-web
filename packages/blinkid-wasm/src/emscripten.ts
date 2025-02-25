@@ -38,6 +38,15 @@ export interface EmscriptenModule {
   // https://emscripten.org/docs/api_reference/emscripten.h.html#c.emscripten_push_uncounted_main_loop_blocker
   setStatus: (text: string) => void;
 
+  /**
+   * Allows you to provide your own WebAssembly.Memory to use as the memory. The
+   * properties used to initialize the memory should match the compiler options.
+   * For example, if you set INITIAL_MEMORY to 8MB without memory growth, then the
+   * wasmMemory you provide (if any) should have both the 'initial' and 'maximum' set
+    to 128 (due to WASM page sizes being 64KB).
+   */
+  wasmMemory: WebAssembly.Memory;
+
   destroy(object: object): void;
   getPreloadedPackage(
     remotePackageName: string,

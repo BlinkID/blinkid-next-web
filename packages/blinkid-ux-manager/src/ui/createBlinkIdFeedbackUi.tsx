@@ -38,14 +38,12 @@ export function createBlinkIdFeedbackUi(
   );
 
   const cleanupFeedbackUi = async () => {
-    dismountUiFeedbackOverlay();
-    store.disposeBlinkIdUiStore();
-
-    if (options?.preserveSdkInstance) {
-      return;
+    if (!options?.preserveSdkInstance) {
+      await store.blinkIdUxManager.blinkIdCore.terminateWorker();
     }
 
-    await store.blinkIdUxManager.blinkIdCore.terminateWorker();
+    dismountUiFeedbackOverlay();
+    store.disposeBlinkIdUiStore();
   };
 
   cameraManagerComponent.addOnDismountCallback(() => {
@@ -53,7 +51,6 @@ export function createBlinkIdFeedbackUi(
     setTimeout(() => {
       void cleanupFeedbackUi();
     }, 0);
-    cleanupFeedbackUi;
   });
 
   return dismountUiFeedbackOverlay;

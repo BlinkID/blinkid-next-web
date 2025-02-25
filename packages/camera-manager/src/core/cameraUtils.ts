@@ -130,7 +130,7 @@ export const findIdealCamera = async (
     return lastCamera;
   }
 
-  console.log(`Found ${cameraPool.length} cameras with requested facing`);
+  console.debug(`Found ${cameraPool.length} cameras with requested facing`);
 
   // if there are no cameras in the pool, use all cameras
   // FROM THIS POINT ON THE POOL CONTAINS ALL CAMERAS ON THE DEVICE, BOTH FRONT & BACK
@@ -155,25 +155,20 @@ export const findIdealCamera = async (
     // this will correct the facing in the Camera instance in case of a mismatch
     await camera.startStream(resolution);
 
-    // console.log(JSON.stringify(camera, null, 2));
+    // console.debug(JSON.stringify(camera, null, 2));
 
     // the stream is active from this point, we hand off an active stream when returning the `Camera` instance
 
     if (!camera.facingMode) {
       // desktop camera?
       // we can't determine facing mode, so we just return the last camera
-      console.log("No facing mode, returning last camera");
+      console.debug("No facing mode, returning last camera");
       return camera;
     }
 
     // mismatched facing mode, move on to the next camera
     if (camera.facingMode && camera.facingMode !== requestedFacing) {
-      console.log("Mismatched facing mode, moving on to the next camera");
-      console.log({
-        name: camera.name,
-        cameraFacing: camera.facingMode,
-        requestedFacing,
-      });
+      console.debug("Mismatched facing mode, moving on to the next camera");
       camera.stopStream();
       continue;
     }
@@ -184,7 +179,7 @@ export const findIdealCamera = async (
     // if it supports both, we know it's the best camera
 
     if (camera.torchSupported && camera.singleShotSupported) {
-      console.log("Camera supports torch and single shot, returning");
+      console.debug("Camera supports torch and single shot, returning");
       return camera;
     }
 
@@ -200,7 +195,7 @@ export const findIdealCamera = async (
 
     // if it's the last camera in the pool, we need to pick one
     if (i === 0) {
-      console.log("Last camera in the pool, picking the best one");
+      console.debug("Last camera in the pool, picking the best one");
       // return the camera from the pool with the highest score from the Map
       let maxKey: Camera | undefined;
       let maxValue = -Infinity;
