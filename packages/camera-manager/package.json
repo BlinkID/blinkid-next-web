@@ -1,7 +1,7 @@
 {
   "name": "@microblink/camera-manager",
   "description": "",
-  "version": "7.0.0-next.5",
+  "version": "7.0.0-next.8",
   "author": "Microblink",
   "scripts": {
     "build": "concurrently pnpm:build:js pnpm:build:types",
@@ -53,7 +53,8 @@
     "common-tags": "^1.8.2",
     "nanoid": "^5.0.2",
     "rad-event-listener": "^0.2.4",
-    "rvfc-polyfill": "^1.0.7"
+    "rvfc-polyfill": "^1.0.7",
+    "type-fest": "^4.35.0"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.17.3",
@@ -81,7 +82,6 @@
     "rimraf": "^6.0.1",
     "sass": "^1.85.0",
     "tsx": "^4.19.2",
-    "type-fest": "^4.35.0",
     "typescript": "^5.7.3",
     "unocss": "^65.5.0",
     "unplugin-icons": "^22.0.0",

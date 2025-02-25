@@ -480,6 +480,9 @@ importers:
       '@microblink/camera-manager':
         specifier: workspace:^
         version: link:../camera-manager
+      type-fest:
+        specifier: ^4.35.0
+        version: 4.35.0
     devDependencies:
       '@arethetypeswrong/cli':
         specifier: ^0.17.3
@@ -517,9 +520,6 @@ importers:
       tsx:
         specifier: ^4.19.2
         version: 4.19.2
-      type-fest:
-        specifier: ^4.35.0
-        version: 4.35.0
       typescript:
         specifier: ^5.7.3
         version: 5.7.3
@@ -557,6 +557,9 @@ importers:
       nanoid:
         specifier: ^5.0.2
         version: 5.0.2
+      type-fest:
+        specifier: ^4.35.0
+        version: 4.35.0
     devDependencies:
       '@arethetypeswrong/cli':
         specifier: ^0.17.3
@@ -600,9 +603,6 @@ importers:
       tsx:
         specifier: ^4.19.2
         version: 4.19.2
-      type-fest:
-        specifier: ^4.35.0
-        version: 4.35.0
       typescript:
         specifier: ^5.7.3
         version: 5.7.3
@@ -658,6 +658,9 @@ importers:
       ts-pattern:
         specifier: ^5.6.2
         version: 5.6.2
+      type-fest:
+        specifier: ^4.35.0
+        version: 4.35.0
     devDependencies:
       '@arethetypeswrong/cli':
         specifier: ^0.17.3
@@ -719,9 +722,6 @@ importers:
       tsx:
         specifier: ^4.19.2
         version: 4.19.2
-      type-fest:
-        specifier: ^4.35.0
-        version: 4.35.0
       typescript:
         specifier: ^5.7.3
         version: 5.7.3
@@ -859,6 +859,9 @@ importers:
       solid-zustand:
         specifier: ^1.8.1
         version: 1.8.1(solid-js@1.9.4)(zustand@4.5.5(react@18.2.0))
+      type-fest:
+        specifier: ^4.35.0
+        version: 4.35.0
       zustand:
         specifier: ^4.5.5
         version: 4.5.5(react@18.2.0)
@@ -938,9 +941,6 @@ importers:
       tsx:
         specifier: ^4.19.2
         version: 4.19.2
-      type-fest:
-        specifier: ^4.35.0
-        version: 4.35.0
       typescript:
         specifier: ^5.7.3
         version: 5.7.3

@@ -36,10 +36,16 @@ await fs.copy("dist", path.join(publishPath, "dist"));
 await fs.copy("types", path.join(publishPath, "types"));
 await fs.copy("README.md", path.join(publishPath, "README.md"));
 
+// add type-fest to dependencies
+const typeFestVersion = packageJson.dependencies["type-fest"];
+
 await writePackage(
   newPackagePath,
   {
     ...corePackageJson,
+    dependencies: {
+      "type-fest": typeFestVersion,
+    },
     access: "public",
     registry: "https://registry.npmjs.org/",
     types: "./types/index.rollup.d.ts",
