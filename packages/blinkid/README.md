@@ -9,13 +9,13 @@ This is an all-in-one package intended for simpler use cases. It includes everyt
 ## Installation
 
 ```bash
-npm install @microblink/blinkid
+npm install @microblink/blinkid-next
 ```
 
 ## Usage
 
 ```typescript
-import { createBlinkIdUi } from "@microblink/blinkid";
+import { createBlinkIdUi } from "@microblink/blinkid-next";
 
 const blinkId = await createBlinkIdUi({
   licenseKey: "your-license-key",

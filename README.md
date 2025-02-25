@@ -50,3 +50,12 @@ pnpm run dev --host
 To run the example apps, you will need a licence key and place it in the `.env` file.
 
 Additionally, each package can be built individually by navigating to its folder and running the corresponding scripts.
+
+## Published packages
+
+Published packages can be found here:
+
+- https://www.npmjs.com/package/@microblink/blinkid-next
+- https://www.npmjs.com/package/@microblink/blinkid-core
+- https://www.npmjs.com/package/@microblink/blinkid-ux-manager
+- https://www.npmjs.com/package/@microblink/camera-manager
