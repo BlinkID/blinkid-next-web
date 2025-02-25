@@ -1,8 +1,8 @@
 {
   "name": "@microblink/blinkid-ux-manager",
   "description": "",
-  "version": "7.0.0-next.4",
-  "author": "",
+  "version": "7.0.0-next.5",
+  "author": "Microblink",
   "scripts": {
     "build": "concurrently pnpm:build:js pnpm:build:types",
     "build:dev": "concurrently pnpm:build:js-dev pnpm:build:types",
