@@ -1,7 +1,7 @@
 {
   "name": "@microblink/blinkid-core",
   "description": "",
-  "version": "7.0.0-next.8",
+  "version": "7.0.0-next.9",
   "author": "Microblink",
   "scripts": {
     "build": "concurrently pnpm:build:js pnpm:build:types",
@@ -46,7 +46,7 @@
     "@microblink/blinkid-in-browser-sdk": "^6.13.0",
     "@microblink/blinkid-wasm": "workspace:*",
     "@microblink/blinkid-worker": "workspace:*",
-    "comlink": "git@github.com:foxglove/comlink.git",
+    "comlink": "^4.4.2",
     "common-tags": "^1.8.2",
     "nanoid": "^5.0.2",
     "type-fest": "^4.35.0"

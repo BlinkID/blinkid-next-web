@@ -2,7 +2,7 @@
   "name": "@microblink/blinkid-worker",
   "description": "",
   "private": true,
-  "version": "7.0.0-next.8",
+  "version": "7.0.0-next.9",
   "scripts": {
     "build": "concurrently pnpm:build:js pnpm:build:types",
     "build:dev": "concurrently pnpm:build:js-dev pnpm:build:types",
@@ -34,7 +34,7 @@
   ],
   "dependencies": {
     "@microblink/blinkid-wasm": "workspace:*",
-    "comlink": "git@github.com:foxglove/comlink.git",
+    "comlink": "^4.4.2",
     "merge-anything": "^6.0.3",
     "type-fest": "^4.35.0",
     "wasm-feature-detect": "^1.8.0"
