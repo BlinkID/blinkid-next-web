@@ -1,7 +1,7 @@
 {
   "name": "@microblink/feedback-stabilizer",
   "private": true,
-  "version": "7.0.0-next.1",
+  "version": "7.0.0-next.4",
   "scripts": {
     "build": "tsc",
     "build:dev": "tsc",
